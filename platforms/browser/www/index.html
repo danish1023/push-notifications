@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Blank App</title>
+</head>
+
+<body>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script>
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            const push = PushNotification.init({
+                android: {
+                },
+                browser: {
+                    pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+                },
+                ios: {
+                    alert: "true",
+                    badge: "true",
+                    sound: "true"
+                },
+                windows: {}
+            });
+
+            push.on('registration', (data) => {
+                alert(data.registrationId);
+            });
+
+            push.on('error', (e) => {
+                alert(e.message);
+            });
+        }
+    </script>
+</body>
+
+</html>
